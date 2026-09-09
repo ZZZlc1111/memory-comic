@@ -1,0 +1,380 @@
+/* 第九章：十格长页漫画，按 846 × 1651 参考图复刻，适配 iPhone Safari */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    color-scheme: light;
+    --paper: #ffffff;
+    --ink: #0c0c0c;
+}
+
+:host {
+    display: block;
+    width: 100%;
+    --paper: #ffffff;
+    --ink: #0c0c0c;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    background: #dfe5ee;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    overflow-x: hidden;
+    font-family: Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.comic-page {
+    width: min(100vw, 430px);
+    margin: 0 auto;
+    padding: max(2px, env(safe-area-inset-top)) 2px max(20px, env(safe-area-inset-bottom));
+    overflow: hidden;
+    background: var(--paper);
+}
+
+.comic-canvas {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 846 / 1651;
+    overflow: hidden;
+    background: var(--paper);
+}
+
+/* 与第八章一致：每次轻触让下一格轻微上移、淡入。 */
+.panel {
+    position: absolute;
+    overflow: hidden;
+    background: var(--ink);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate3d(0, 7px, 0) scale(0.996);
+    -webkit-transform: translate3d(0, 7px, 0) scale(0.996);
+    transition:
+        opacity 0.6s ease,
+        transform 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+}
+
+.panel.visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate3d(0, 0, 0) scale(1);
+    -webkit-transform: translate3d(0, 0, 0) scale(1);
+}
+
+.panel-inner {
+    position: absolute;
+    inset: 2px;
+    overflow: hidden;
+    background: #222;
+    clip-path: inherit;
+    -webkit-clip-path: inherit;
+}
+
+.panel-inner > img {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    -webkit-user-drag: none;
+}
+
+.panel-number {
+    position: absolute;
+    z-index: 40;
+    top: 3px;
+    left: 7px;
+    color: #fff;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(12px, 3.3vw, 15px);
+    font-weight: 400;
+    line-height: 1;
+    text-shadow: 0 1px 2px #000, 0 0 2px #000;
+    pointer-events: none;
+}
+
+/* 参考图逐格坐标与斜切轮廓。 */
+.p01 {
+    left: 0.24%;
+    top: 0.12%;
+    width: 99.53%;
+    height: 17.81%;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 88%);
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 88%);
+}
+
+.p02 {
+    left: 0.24%;
+    top: 16%;
+    width: 99.53%;
+    height: 16.5%;
+    clip-path: polygon(0 0, 100% 14%, 100% 100%, 0 98%);
+    -webkit-clip-path: polygon(0 0.5%, 100% 13.5%, 100% 100%, 0 98%);
+}
+
+.p03 {
+    left: 0.24%;
+    top: 32.34%;
+    width: 48.23%;
+    height: 19.62%;
+    clip-path: polygon(0 0, 100% 4%, 91.8% 100%, 0 97%);
+    -webkit-clip-path: polygon(0 0, 100% 1%, 90% 100%, 0 97%);
+}
+
+.p04 {
+    left: 44.09%;
+    top: 32.56%;
+    width: 55.67%;
+    height: 20.65%;
+    clip-path: polygon(8.1% 1.8%, 100% 0, 100% 100%, 0 92.5%);
+    -webkit-clip-path: polygon(8.8% 0%, 99.8% 1%, 100% 100%, 0 94%);
+}
+
+.p05 {
+    left: 0.24%;
+    top: 51.65%;
+    width: 48.58%;
+    height: 20.53%;
+    clip-path: polygon(0 0, 95.1% 7.5%, 100% 100%, 0 91.5%);
+    -webkit-clip-path: polygon(0 0, 95.1% 3%, 100% 100%, 0 91.5%);
+}
+
+.p06 {
+    left: 46.4%;
+    top: 52.28%;
+    width: 53.19%;
+    height: 21.5%;
+    clip-path: polygon(0 0, 100% 4%, 100% 100%, 3.8% 93.1%);
+    -webkit-clip-path: polygon(1% 0%, 100% 5.8%, 100% 100%, 5.5% 92.5%);
+}
+
+.p07 {
+    left: 0.24%;
+    top: 70.65%;
+    width: 50.12%;
+    height: 16.84%;
+    clip-path: polygon(0 0, 100% 11.2%, 96.2% 100%, 0 95.3%);
+    -webkit-clip-path: polygon(0 0, 100% 11.2%, 96.2% 100%, 0 95.3%);
+}
+
+.p08 {
+    left: 47.9%;
+    top: 72.5%;
+    width: 51.65%;
+    height: 15%;
+    clip-path: polygon(4% 0, 100% 10%, 100% 96%, 0 100%);
+    -webkit-clip-path: polygon(5.8% 0, 100% 10.5%, 100% 100%, 2% 99.8%);
+}
+
+.p09 {
+    left: 0.24%;
+    top: 87%;
+    width: 49.41%;
+    height: 12.90%;
+
+    clip-path: polygon(
+        0 0,
+        100% 3.3%,
+        96.6% 100%,
+        0 100%
+    );
+
+    -webkit-clip-path: polygon(
+        0 0,
+        100% 6%,
+        96.6% 100%,
+        0 100%
+    );
+}
+
+.p10 {
+    left: 47.4%;
+    top: 87.8%;
+    width: 52.2%;
+    height: 12.10%;
+
+    clip-path: polygon(
+        4.1% 0,
+        100% 6.4%,
+        100% 100%,
+        1% 100%
+    );
+
+    -webkit-clip-path: polygon(
+        5.3% 0,
+        100% 0%,
+        100% 100%,
+        2% 100%
+    );
+}
+
+/* 单图裁切焦点。 */
+.p01 img { object-position: 50% 70%; }
+.p02 img {
+    object-position: 55% 57%;
+    transform: scale(1);
+    -webkit-transform: scale(1);
+}
+.p03 img { object-position: 57% 50%; }
+.p04 img { object-position: 55% 52%; }
+.p05 img { object-position: 53% 50%; }
+.p06 img { object-position: 54% 50%; 
+    transform: scale(1);
+    -webkit-transform: scale(1);}
+.p07 img { object-position: 52% 53%; }
+.p08 img { object-position: 50% 48%; }
+.p09 img { object-position: 47% 46%; }
+.p10 img { object-position: 52% 60%; }
+
+/* 第 8 格拟声字。 */
+.delayed-element {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate3d(0, 3px, 0) scale(0.98);
+    -webkit-transform: translate3d(0, 3px, 0) scale(0.98);
+    transition:
+        opacity 0.45s ease,
+        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.delayed-element.show-detail {
+    opacity: 1;
+    visibility: visible;
+    transform: translate3d(0, 0, 0) scale(1);
+    -webkit-transform: translate3d(0, 0, 0) scale(1);
+}
+
+.seatbelt-sfx {
+    position: absolute;
+    z-index: 30;
+    left: 64%;
+    top: 23%;
+    color: #fff;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.85));
+}
+
+.sfx-text {
+    display: block;
+    font-family: "STKaiti", "KaiTi", "PingFang SC", serif;
+    font-size: clamp(15px, 4.7vw, 21px);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    transform: rotate(3deg);
+    -webkit-transform: rotate(3deg);
+}
+
+.sfx-lines,
+.sfx-lines::before,
+.sfx-lines::after {
+    position: absolute;
+    display: block;
+    width: 12px;
+    height: 2px;
+    border-radius: 2px;
+    background: #fff;
+    content: "";
+}
+
+.sfx-lines {
+    left: -11px;
+    top: 31px;
+    transform: rotate(-56deg);
+    -webkit-transform: rotate(-56deg);
+}
+
+.sfx-lines::before {
+    left: -7px;
+    top: -7px;
+    width: 9px;
+    transform: rotate(-25deg);
+    -webkit-transform: rotate(-25deg);
+}
+
+.sfx-lines::after {
+    left: 7px;
+    top: 8px;
+    width: 8px;
+    transform: rotate(35deg);
+    -webkit-transform: rotate(35deg);
+}
+
+/* 点按提示与第八章保持一致。 */
+#tapHint {
+    position: fixed;
+    z-index: 9999;
+    left: 50%;
+    bottom: calc(24px + env(safe-area-inset-bottom));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    color: rgba(0, 0, 0, 0.42);
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    pointer-events: none;
+    opacity: 1;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    animation: tapHintBreath 1.8s ease-in-out infinite;
+}
+
+.tap-hint-text { white-space: nowrap; }
+
+.tap-hint-arrow {
+    width: 8px;
+    height: 8px;
+    border-right: 1.4px solid rgba(0, 0, 0, 0.38);
+    border-bottom: 1.4px solid rgba(0, 0, 0, 0.38);
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+#tapHint.hide {
+    opacity: 0;
+    transform: translateX(-50%) translateY(8px);
+    -webkit-transform: translateX(-50%) translateY(8px);
+    animation: none;
+}
+
+@keyframes tapHintBreath {
+    0%, 100% { opacity: 0.30; }
+    50% { opacity: 0.85; }
+}
+
+@media (min-width: 600px) {
+    .comic-page { box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .panel,
+    .delayed-element,
+    #tapHint {
+        transition: none;
+        animation: none;
+    }
+}

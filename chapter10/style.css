@@ -1,0 +1,982 @@
+/* =========================================================
+   第十章：九格互动长页漫画
+
+   功能：
+   - 每格独立四角
+   - 黑色分镜描边
+   - 第九格 16:9 视频
+   - 视频原生暂停
+   - 视频进度条拖动
+   - 视频时间跳转
+   - 视频全屏
+   - iPhone Safari 支持
+   ========================================================= */
+
+
+/* =========================================================
+   基础
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+:root {
+    color-scheme: light;
+
+    --paper: #ffffff;
+    --ink: #111111;
+
+    --panel-border: 2px;
+}
+
+
+/* =========================================================
+   页面
+   ========================================================= */
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+
+    background: #dfe5ee;
+}
+
+
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+
+body {
+    overflow-x: hidden;
+
+    font-family:
+        Arial,
+        "PingFang SC",
+        "Microsoft YaHei",
+        sans-serif;
+
+    -webkit-tap-highlight-color: transparent;
+
+    touch-action: pan-y;
+
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+
+/* =========================================================
+   漫画页面
+   ========================================================= */
+
+.comic-page {
+    width: min(100vw, 430px);
+
+    margin: 0 auto;
+
+    padding:
+        max(2px, env(safe-area-inset-top))
+        2px
+        max(10px, env(safe-area-inset-bottom));
+
+    overflow: hidden;
+
+    background: var(--paper);
+}
+
+
+/* =========================================================
+   漫画白板
+   ========================================================= */
+
+.comic-canvas {
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 774 / 2100;
+
+    overflow: hidden;
+
+    background: var(--paper);
+}
+
+
+/* =========================================================
+   分镜公共样式
+   ========================================================= */
+
+.panel {
+    position: absolute;
+
+
+    /* -----------------------------
+       默认四角
+       ----------------------------- */
+
+    --tl-x: 0%;
+    --tl-y: 0%;
+
+    --tr-x: 100%;
+    --tr-y: 0%;
+
+    --br-x: 100%;
+    --br-y: 100%;
+
+    --bl-x: 0%;
+    --bl-y: 100%;
+
+
+    background: var(--ink);
+
+    overflow: hidden;
+
+
+    clip-path: polygon(
+        var(--tl-x) var(--tl-y),
+        var(--tr-x) var(--tr-y),
+        var(--br-x) var(--br-y),
+        var(--bl-x) var(--bl-y)
+    );
+
+
+    -webkit-clip-path: polygon(
+        var(--tl-x) var(--tl-y),
+        var(--tr-x) var(--tr-y),
+        var(--br-x) var(--br-y),
+        var(--bl-x) var(--bl-y)
+    );
+
+
+    /* -----------------------------
+       初始隐藏
+       ----------------------------- */
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+
+    transform:
+        translate3d(0, 7px, 0)
+        scale(0.996);
+
+
+    -webkit-transform:
+        translate3d(0, 7px, 0)
+        scale(0.996);
+
+
+    transition:
+        opacity 0.6s ease,
+        transform 0.72s cubic-bezier(
+            0.22,
+            1,
+            0.36,
+            1
+        );
+
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+/* =========================================================
+   分镜显示
+   ========================================================= */
+
+.panel.visible {
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+
+    transform:
+        translate3d(0, 0, 0)
+        scale(1);
+
+
+    -webkit-transform:
+        translate3d(0, 0, 0)
+        scale(1);
+}
+
+
+/* =========================================================
+   分镜内部
+   ========================================================= */
+
+.panel-inner {
+    position: absolute;
+
+    inset: var(--panel-border);
+
+    overflow: hidden;
+
+    background: #161616;
+
+
+    clip-path: polygon(
+        var(--tl-x) var(--tl-y),
+        var(--tr-x) var(--tr-y),
+        var(--br-x) var(--br-y),
+        var(--bl-x) var(--bl-y)
+    );
+
+
+    -webkit-clip-path: polygon(
+        var(--tl-x) var(--tl-y),
+        var(--tr-x) var(--tr-y),
+        var(--br-x) var(--br-y),
+        var(--bl-x) var(--bl-y)
+    );
+}
+
+
+/* =========================================================
+   普通图片
+
+   图片禁止点击、拖动。
+   ========================================================= */
+
+.panel-inner > img {
+    position: relative;
+
+    z-index: 1;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    pointer-events: none;
+
+    -webkit-user-drag: none;
+}
+
+
+/* =========================================================
+   视频
+
+   注意：
+
+   视频绝对不能再设置：
+
+   pointer-events: none;
+
+   否则下面所有功能都会失效：
+
+   - 暂停
+   - 播放
+   - 拖进度条
+   - 快进
+   - 全屏
+   ========================================================= */
+
+.panel-inner > video {
+    position: relative;
+
+    z-index: 2;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    pointer-events: auto;
+
+    /*
+       必须允许 Safari / Chrome
+       自己处理进度条拖动。
+    */
+    touch-action: auto;
+
+    user-select: auto;
+    -webkit-user-select: auto;
+
+    -webkit-user-drag: none;
+}
+
+
+/* =========================================================
+   分镜 1
+   ========================================================= */
+
+.p01 {
+    left: 0.26%;
+    top: 0.1086%;
+
+    width: 99.48%;
+    height: 10.8571%;
+
+
+    --tl-x: 0%;
+    --tl-y: 0%;
+
+    --tr-x: 100%;
+    --tr-y: 0%;
+
+    --br-x: 100%;
+    --br-y: 100%;
+
+    --bl-x: 0%;
+    --bl-y: 100%;
+}
+
+
+/* =========================================================
+   分镜 2
+   ========================================================= */
+
+.p02 {
+    left: 0.26%;
+    top: 11.1286%;
+
+    width: 99.48%;
+    height: 11.6805%;
+
+
+    --tl-x: 0%;
+    --tl-y: 0%;
+
+    --tr-x: 100%;
+    --tr-y: 0%;
+
+    --br-x: 100%;
+    --br-y: 90%;
+
+    --bl-x: 0%;
+    --bl-y: 100%;
+}
+
+
+/* =========================================================
+   分镜 3
+   ========================================================= */
+
+.p03 {
+    left: 0.26%;
+    top: 21.8952%;
+
+    width: 99.48%;
+    height: 11.6805%;
+
+
+    --tl-x: 0%;
+    --tl-y: 10%;
+
+    --tr-x: 100%;
+    --tr-y: 0%;
+
+    --br-x: 100%;
+    --br-y: 100%;
+
+    --bl-x: 0%;
+    --bl-y: 90%;
+}
+
+
+/* =========================================================
+   分镜 4
+   ========================================================= */
+
+.p04 {
+    left: 0.26%;
+    top: 32.6619%;
+
+    width: 99.48%;
+    height: 10.8571%;
+
+
+    --tl-x: 0%;
+    --tl-y: 0%;
+
+    --tr-x: 100%;
+    --tr-y: 11.5%;
+
+    --br-x: 100%;
+    --br-y: 90%;
+
+    --bl-x: 0%;
+    --bl-y: 100%;
+}
+
+
+/* =========================================================
+   分镜 5
+   ========================================================= */
+
+.p05 {
+    left: 0.26%;
+    top: 42.6143%;
+
+    width: 99.48%;
+    height: 7.2381%;
+
+
+    --tl-x: 0%;
+    --tl-y: 15.4%;
+
+    --tr-x: 100%;
+    --tr-y: 0%;
+
+    --br-x: 100%;
+    --br-y: 100%;
+
+    --bl-x: 0%;
+    --bl-y: 100%;
+}
+
+
+/* =========================================================
+   分镜 6
+   ========================================================= */
+
+.p06 {
+    left: 0.26%;
+    top: 56.8190%;
+
+    width: 99.48%;
+    height: 11.7890%;
+
+
+    --tl-x: 0%;
+    --tl-y: 0%;
+
+    --tr-x: 100%;
+    --tr-y: 0%;
+
+    --br-x: 100%;
+    --br-y: 100%;
+
+    --bl-x: 0%;
+    --bl-y: 100%;
+}
+
+
+/* =========================================================
+   分镜 7
+   ========================================================= */
+
+.p07 {
+    left: 0.26%;
+    top: 50.0786%;
+
+    width: 99.48%;
+    height: 6.4962%;
+
+
+    --tl-x: 0%;
+    --tl-y: 0%;
+
+    --tr-x: 100%;
+    --tr-y: 0%;
+
+    --br-x: 100%;
+    --br-y: 100%;
+
+    --bl-x: 0%;
+    --bl-y: 100%;
+}
+
+
+/* =========================================================
+   分镜 8
+   ========================================================= */
+
+.p08 {
+    left: 0.26%;
+    top: 68.9429%;
+
+    width: 99.48%;
+    height: 10.0429%;
+
+
+    --tl-x: 0%;
+    --tl-y: 0%;
+
+    --tr-x: 100%;
+    --tr-y: 0%;
+
+    --br-x: 100%;
+    --br-y: 100%;
+
+    --bl-x: 0%;
+    --bl-y: 100%;
+}
+
+
+/* =========================================================
+   分镜 9
+
+   16:9 视频
+   ========================================================= */
+
+.p09 {
+    left: 0.26%;
+
+    top: 79.2571%;
+
+    width: 99.48%;
+
+    /*
+       根据宽度自动得到高度。
+    */
+    height: auto;
+
+    aspect-ratio: 16 / 9;
+
+
+    --tl-x: 0%;
+    --tl-y: 0%;
+
+    --tr-x: 100%;
+    --tr-y: 0%;
+
+    --br-x: 100%;
+    --br-y: 100%;
+
+    --bl-x: 0%;
+    --bl-y: 100%;
+}
+
+
+/* =========================================================
+   图片裁切位置
+   ========================================================= */
+
+.p01 img {
+    object-position: 50% 80%;
+}
+
+
+.p02 img {
+    object-position: 50% 50%;
+}
+
+
+.p03 img {
+    object-position: 50% 51%;
+}
+
+
+.p04 img {
+    object-position: 50% 51%;
+}
+
+
+.p05 img {
+    object-position: 50% 48%;
+}
+
+
+.p06 img {
+    object-position: 50% 55%;
+}
+
+
+.p07 img {
+    object-position: 50% 72%;
+}
+
+
+.p08 img {
+    object-position: 50% 48%;
+}
+
+
+/* =========================================================
+   视频区域
+   ========================================================= */
+
+.video-panel .panel-inner {
+    display: grid;
+
+    place-items: stretch;
+
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(255, 255, 255, 0.045),
+            transparent 34%
+        ),
+        linear-gradient(
+            180deg,
+            #161616 0%,
+            #101010 100%
+        );
+}
+
+
+/* =========================================================
+   视频本体
+   ========================================================= */
+
+.video-panel video {
+    grid-area: 1 / 1;
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    background: #101010;
+
+    pointer-events: auto;
+
+    touch-action: auto;
+}
+
+
+/* =========================================================
+   第一次播放前的大播放按钮
+   ========================================================= */
+
+.video-button {
+    position: relative;
+
+    z-index: 4;
+
+    grid-area: 1 / 1;
+
+    align-self: center;
+    justify-self: center;
+
+
+    width: clamp(
+        56px,
+        15vw,
+        68px
+    );
+
+
+    aspect-ratio: 1;
+
+
+    border:
+        1.5px
+        solid
+        rgba(255, 255, 255, 0.9);
+
+
+    border-radius: 50%;
+
+
+    background:
+        rgba(10, 10, 10, 0.20);
+
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease,
+        transform 0.2s ease,
+        background-color 0.2s ease;
+
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+.video-button:hover {
+    background:
+        rgba(255, 255, 255, 0.08);
+
+    transform: scale(1.04);
+}
+
+
+.video-button:focus-visible {
+    outline:
+        2px
+        solid
+        #ffffff;
+
+    outline-offset: 4px;
+}
+
+
+/* =========================================================
+   播放三角
+   ========================================================= */
+
+.play-triangle {
+    position: absolute;
+
+    left: 40%;
+    top: 30%;
+
+    width: 0;
+    height: 0;
+
+
+    border-top:
+        clamp(
+            12px,
+            3.2vw,
+            15px
+        )
+        solid
+        transparent;
+
+
+    border-bottom:
+        clamp(
+            12px,
+            3.2vw,
+            15px
+        )
+        solid
+        transparent;
+
+
+    border-left:
+        clamp(
+            19px,
+            5vw,
+            24px
+        )
+        solid
+        #ffffff;
+}
+
+
+/* =========================================================
+   第一次播放之后
+
+   永久隐藏漫画中央大播放按钮。
+
+   后续全部使用视频原生控制条。
+   ========================================================= */
+
+.video-panel.has-started .video-button {
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   视频原生控制条说明
+
+   不要添加类似：
+
+   video::-webkit-media-controls {
+       display: none;
+   }
+
+   否则暂停、进度、全屏都会消失。
+   ========================================================= */
+
+
+/* =========================================================
+   轻触提示
+   ========================================================= */
+
+#tapHint {
+    position: fixed;
+
+    z-index: 9999;
+
+    left: 50%;
+
+
+    bottom:
+        calc(
+            24px +
+            env(safe-area-inset-bottom)
+        );
+
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+
+    gap: 7px;
+
+
+    color:
+        rgba(
+            0,
+            0,
+            0,
+            0.42
+        );
+
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+
+    pointer-events: none;
+
+
+    opacity: 1;
+
+
+    transform:
+        translateX(-50%);
+
+
+    -webkit-transform:
+        translateX(-50%);
+
+
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
+
+
+    animation:
+        tapHintBreath
+        1.8s
+        ease-in-out
+        infinite;
+}
+
+
+.tap-hint-text {
+    white-space: nowrap;
+}
+
+
+.tap-hint-arrow {
+    width: 8px;
+    height: 8px;
+
+
+    border-right:
+        1.4px
+        solid
+        rgba(
+            0,
+            0,
+            0,
+            0.38
+        );
+
+
+    border-bottom:
+        1.4px
+        solid
+        rgba(
+            0,
+            0,
+            0,
+            0.38
+        );
+
+
+    transform:
+        rotate(45deg);
+
+
+    -webkit-transform:
+        rotate(45deg);
+}
+
+
+#tapHint.hide {
+    opacity: 0;
+
+
+    transform:
+        translateX(-50%)
+        translateY(8px);
+
+
+    -webkit-transform:
+        translateX(-50%)
+        translateY(8px);
+
+
+    animation: none;
+}
+
+
+/* =========================================================
+   提示动画
+   ========================================================= */
+
+@keyframes tapHintBreath {
+
+    0%,
+    100% {
+        opacity: 0.30;
+    }
+
+
+    50% {
+        opacity: 0.85;
+    }
+
+}
+
+
+/* =========================================================
+   大屏幕
+   ========================================================= */
+
+@media (min-width: 600px) {
+
+    .comic-page {
+        box-shadow:
+            0 10px 40px
+            rgba(
+                0,
+                0,
+                0,
+                0.15
+            );
+    }
+
+}
+
+
+/* =========================================================
+   减少动画
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .panel,
+    #tapHint,
+    .video-button {
+        transition: none;
+
+        animation: none;
+    }
+
+}

@@ -1,0 +1,365 @@
+/* 第二章：沿用第一章的逐格出现与文字淡入节奏 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    background: #dfe5ee;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    overflow-x: hidden;
+    font-family: Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.comic-page {
+    width: min(100vw, 430px);
+    margin: 0 auto;
+    padding: max(8px, env(safe-area-inset-top)) 8px 0;
+    background: #fff;
+}
+
+.comic-canvas {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 414 / 916;
+    background: #fff;
+    contain: layout paint;
+}
+
+.panel {
+    position: absolute;
+    overflow: visible;
+    background: #111;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate3d(0, 7px, 0) scale(0.996);
+    -webkit-transform: translate3d(0, 7px, 0) scale(0.996);
+    transition:
+        opacity 0.6s ease,
+        transform 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+}
+
+.panel.visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate3d(0, 0, 0) scale(1);
+    -webkit-transform: translate3d(0, 0, 0) scale(1);
+}
+
+.panel-inner {
+    position: absolute;
+    inset: 2px;
+    overflow: hidden;
+    background: #eee;
+    clip-path: inherit;
+    -webkit-clip-path: inherit;
+}
+
+.panel-inner img {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    -webkit-user-drag: none;
+}
+
+.delayed-element {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate3d(0, 3px, 0) scale(0.98);
+    -webkit-transform: translate3d(0, 3px, 0) scale(0.98);
+    transition:
+        opacity 0.45s ease,
+        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.delayed-element.show-detail {
+    opacity: 1;
+    visibility: visible;
+    transform: translate3d(0, 0, 0) scale(1);
+    -webkit-transform: translate3d(0, 0, 0) scale(1);
+}
+
+.speech-bubble {
+    position: absolute;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 7px;
+    border: 1.35px solid #111;
+    border-radius: 50%;
+    background: #fff;
+    color: #111;
+    text-align: center;
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.25;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+
+/* 九格排版：比例来自第二章参考图 */
+
+.p01 {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 13.76%;
+    clip-path: polygon(0 0, 100% 0, 99.5% 100%, 0.5% 96%);
+    -webkit-clip-path: polygon(0 0, 100% 0, 99.5% 100%, 0.5% 96%);
+}
+
+.p02 {
+    left: 0;
+    top: 13.4%;
+    width: 100%;
+    height: 20%;
+    clip-path: polygon(0.4% 0.8%, 99.5% 3%, 100% 98%, 0 100%);
+    -webkit-clip-path: polygon(0.4% 0.8%, 99.5% 3%, 100% 98%, 0 100%);
+}
+
+.p03 {
+    left: 0;
+    top: 33.3%;
+    width: 100%;
+    height: 13.10%;
+    clip-path: polygon(0 3%, 100% 0, 99.6% 100%, 0.5% 98%);
+    -webkit-clip-path: polygon(0 3%, 100% 0, 99.6% 100%, 0.5% 98%);
+}
+
+.p04 {
+    left: 0.5%;
+    top: 46.4%;
+    width: 49.5%;
+    height: 14.4%;
+    clip-path: polygon(0 0.5%, 98.6% 2%, 96.2% 100%, 0% 99%);
+    -webkit-clip-path: polygon(0 0.5%, 98.6% 2%, 96.2% 100%, 0% 99%);
+}
+
+.p05 {
+    left: 48.8%;
+    top: 46.4%;
+    width: 51.2%;
+    height: 14.4%;
+    clip-path: polygon(2% 2%, 100% 2%, 99.5% 99.5%, 0 100%);
+    -webkit-clip-path: polygon(2% 2%, 100% 2%, 99.5% 99.5%, 0 100%);
+}
+
+.p06 {
+    left: 0;
+    top: 61%;
+    width: 100%;
+    height: 11.90%;
+    clip-path: polygon(0.4% 0, 100% 1.5%, 100% 100%, 0 96%);
+    -webkit-clip-path: polygon(0.4% 0, 100% 1.5%, 100% 100%, 0 96%);
+}
+
+.p07 {
+    left: 0;
+    top: 72.85%;
+    width: 49%;
+    height: 11.85%;
+    clip-path: polygon(0 0, 99% 1.5%, 96.5% 100%, 0.5% 99%);
+    -webkit-clip-path: polygon(0 0, 99% 1.5%, 96.5% 100%, 0.5% 99%);
+}
+
+.p08 {
+    left: 48%;
+    top: 73.05%;
+    width: 51.8%;
+    height: 11.6%;
+    clip-path: polygon(1.8% 0%, 100% 1.5%, 99.5% 100%, 0 100%);
+    -webkit-clip-path: polygon(1.8% 0%, 100% 1.5%, 99.5% 100%, 0 100%);
+}
+
+.p09 {
+    left: 0;
+    top: 85%;
+    width: 100%;
+    height: 14%;
+    clip-path: polygon(0.3% 0, 99.7% 1%, 100% 100%, 0 100%);
+    -webkit-clip-path: polygon(0.3% 0, 99.7% 1%, 100% 100%, 0 100%);
+}
+
+/* 构图裁切 */
+
+.p01 img { object-position: 50% 40%; }
+.p02 img { object-position: 50% 30%;
+    transform: scale(1); }
+.p03 img { object-position: 50% 47%; }
+.p04 img { object-position: 45% 47%;
+    transform:
+        translateX(-5px)
+        translateY(0px)
+        scale(1.1); }
+.p05 img { object-position: 50% 54%;
+    transform:
+        translateX(5px)
+        translateY(0px)
+        scale(1.05);}
+.p06 img { object-position: 50% 44%; }
+.p07 img { object-position: 50% 47%; }
+.p08 img { object-position: 50% 49%; }
+.p09 img { object-position: 50% 48%; }
+
+/* 对话位置 */
+
+.bubble-02 {
+    left: 36%;
+    top: 10%;
+    width: 70px;
+    height: 30px;
+    
+}
+
+.bubble-02 span {
+    position: relative;
+
+    left: 0.5px;
+    top: 1px;
+}
+
+.bubble-03-a {
+    left: 4%;
+    top: 16%;
+    width: 70px;
+    height: 40px;
+}
+.bubble-03-a span {
+    position: relative;
+
+    left: 0.5px;
+    top: 1.5px;
+}
+
+.bubble-03-b {
+    right: 4%;
+    top: 20%;
+    width: 50px;
+    height: 30px;
+}
+.bubble-03-b span {
+    position: relative;
+
+    left: 0px;
+    top: 1.5px;
+}
+.bubble-06 {
+    left: 5%;
+    top: 10%;
+    width: 94px;
+    height: 50px;
+}
+
+.bubble-08-a {
+    left: 3%;
+    top: 14%;
+    width: 57px;
+    height: 40px;
+    font-size: 9px;
+}
+
+.bubble-08-b {
+    right: 3%;
+    top: 21%;
+    width: 50px;
+    height: 30px;
+    font-size: 8px;
+}
+.bubble-08-b span {
+    position: relative;
+
+    left: 0px;
+    top: -1px;
+}
+.bubble-09 {
+    left: 5%;
+    top: 10%;
+    width: 90px;
+    height: 50px;
+    font-size: 10px;
+}
+
+#tapHint {
+    position: fixed;
+    z-index: 9999;
+    left: 50%;
+    bottom: calc(24px + env(safe-area-inset-bottom));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    color: rgba(0, 0, 0, 0.42);
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    pointer-events: none;
+    opacity: 1;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    animation: tapHintBreath 1.8s ease-in-out infinite;
+}
+
+.tap-hint-text { white-space: nowrap; }
+
+.tap-hint-arrow {
+    width: 8px;
+    height: 8px;
+    border-right: 1.4px solid rgba(0, 0, 0, 0.38);
+    border-bottom: 1.4px solid rgba(0, 0, 0, 0.38);
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+@keyframes tapHintBreath {
+    0%, 100% { opacity: 0.30; }
+    50% { opacity: 0.85; }
+}
+
+#tapHint.hide {
+    opacity: 0;
+    transform: translateX(-50%) translateY(8px);
+    -webkit-transform: translateX(-50%) translateY(8px);
+    animation: none;
+}
+
+@media (min-width: 600px) {
+    .comic-page { box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .panel,
+    .delayed-element,
+    #tapHint {
+        transition: none;
+        animation: none;
+    }
+}

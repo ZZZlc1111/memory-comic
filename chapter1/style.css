@@ -1,0 +1,1188 @@
+/* =========================================
+   基础
+========================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+html,
+body{
+
+    width:100%;
+    min-height:100%;
+
+    background:#dfe5ee;
+
+}
+
+
+body{
+
+    font-family:
+        Arial,
+        "Microsoft YaHei",
+        sans-serif;
+
+    -webkit-tap-highlight-color:transparent;
+
+    touch-action:pan-y;
+
+    user-select:none;
+    -webkit-user-select:none;
+
+}
+
+
+/* =========================================
+   手机漫画页面
+========================================= */
+
+.comic-page{
+
+    width:min(100vw,430px);
+
+    margin:auto;
+
+    padding:12px 8px 0;
+
+    background:#fff;
+
+}
+
+
+.comic-canvas{
+
+    position:relative;
+
+    width:100%;
+
+    height:835px;
+
+    background:white;
+
+}
+
+
+/* =========================================
+   所有漫画格基础
+========================================= */
+
+.panel{
+
+    position:absolute;
+
+    background:#111;
+
+
+    /*
+       默认02～08隐藏
+    */
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+
+
+    /*
+       柔和出现
+    */
+
+    transform:
+        translateY(7px)
+        scale(0.996);
+
+
+    transition:
+        opacity 0.6s ease,
+        transform 0.72s cubic-bezier(
+            0.22,
+            1,
+            0.36,
+            1
+        );
+
+
+    will-change:
+        opacity,
+        transform;
+
+}
+
+
+/* =========================================
+   已显示分镜
+========================================= */
+
+.panel.visible{
+
+    opacity:1;
+
+    visibility:visible;
+
+    pointer-events:auto;
+
+    transform:
+        translateY(0)
+        scale(1);
+
+}
+
+
+/* =========================================
+   漫画格内部
+========================================= */
+
+.panel-inner{
+
+    position:absolute;
+
+    inset:2px;
+
+    clip-path:inherit;
+
+    background:#eee;
+
+    overflow:hidden;
+
+}
+
+
+.panel-inner img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    display:block;
+
+    position:relative;
+
+    z-index:1;
+
+    pointer-events:none;
+
+    -webkit-user-drag:none;
+
+}
+
+
+/* =========================================
+   漫画文字通用
+========================================= */
+
+.comic-text{
+
+    position:absolute;
+
+    z-index:20;
+
+    color:#111;
+
+    font-family:
+        "PingFang SC",
+        "Microsoft YaHei",
+        sans-serif;
+
+    pointer-events:none;
+
+}
+
+
+/* =========================================
+   延迟元素
+========================================= */
+
+.delayed-element{
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+
+
+    transition:
+        opacity 0.45s ease,
+        transform 0.55s cubic-bezier(
+            0.22,
+            1,
+            0.36,
+            1
+        );
+
+}
+
+
+.delayed-element.show-detail{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+
+/* =========================================
+   通用对话气泡
+========================================= */
+
+.speech-bubble{
+
+    position:absolute;
+
+    z-index:30;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    background:#fff;
+
+    color:#111;
+
+    border:1.4px solid #111;
+
+    border-radius:50%;
+
+    font-family:
+        "PingFang SC",
+        "Microsoft YaHei",
+        sans-serif;
+
+    font-weight:600;
+
+    line-height:1.35;
+
+    pointer-events:none;
+
+}
+
+
+/* =========================================
+   01
+========================================= */
+
+.p01{
+
+    left:0;
+
+    top:0;
+
+    width:100%;
+
+    height:125px;
+
+
+    clip-path:polygon(
+
+        0% 0%,
+
+        100% 0%,
+
+        100% 95%,
+
+        50% 100%,
+
+        0% 83%
+
+    );
+
+}
+
+
+/* =========================================
+   02
+========================================= */
+
+.p02{
+
+    left:0%;
+
+    top:105px;
+
+    width:50%;
+
+    height:140px;
+
+
+    clip-path:polygon(
+
+        5% 3%,
+
+        100% 18%,
+
+        90% 100%,
+
+        0% 100%
+
+    );
+
+}
+
+
+/* =========================================
+   02 小声层
+========================================= */
+
+.whisper-layer{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:20;
+
+}
+
+
+.whisper-layer.delayed-element{
+
+    transform:translateY(3px);
+
+}
+
+
+.whisper-layer.show-detail{
+
+    transform:translateY(0);
+
+}
+
+
+/* =========================================
+   02 小声
+========================================= */
+
+.whisper{
+
+    font-size:9px;
+
+    font-weight:600;
+
+    color:#222;
+
+    white-space:nowrap;
+
+}
+
+
+.whisper-1{
+
+    right:21%;
+
+    top:40%;
+
+    transform:rotate(-8deg);
+
+}
+
+
+.whisper-2{
+
+    right:4.5%;
+
+    top:33%;
+
+    transform:rotate(5deg);
+
+}
+
+
+/* =========================================
+   02 省略号气泡
+========================================= */
+
+.ellipsis{
+
+    position:absolute;
+
+    z-index:20;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#fff;
+
+    border:1.2px solid #111;
+
+    border-radius:50%;
+
+    color:#111;
+
+    font-size:12px;
+
+    line-height:1;
+
+    pointer-events:none;
+
+}
+
+
+.ellipsis-1{
+
+    width:25px;
+
+    height:34px;
+
+    right:19%;
+
+    top:36%;
+
+    transform:rotate(-4deg);
+
+}
+
+
+.ellipsis-2{
+
+    width:24px;
+
+    height:32px;
+
+    right:3%;
+
+    top:29%;
+
+    transform:rotate(5deg);
+
+}
+
+
+/* =========================================
+   03
+========================================= */
+
+.p03{
+
+    left:45%;
+
+    top:120px;
+
+    width:60%;
+
+    height:140px;
+
+
+    clip-path:polygon(
+
+        10% 7%,
+
+        88% 3%,
+
+        88% 95%,
+
+        2% 89.5%
+
+    );
+
+}
+
+
+/* =========================================
+   04
+========================================= */
+
+.p04{
+
+    left:0%;
+
+    top:250px;
+
+    width:100%;
+
+    height:130px;
+
+
+    clip-path:polygon(
+
+        6% 0%,
+
+        45% 0%,
+
+        94% 6%,
+
+        97% 100%,
+
+        3.2% 95%
+
+    );
+
+}
+
+
+/* =========================================
+   05
+========================================= */
+
+.p05{
+
+    left:0;
+
+    top:379px;
+
+    width:100%;
+
+    height:110px;
+
+
+    clip-path:polygon(
+
+        3% 0%,
+
+        97% 6%,
+
+        99.5% 100%,
+
+        1.5% 95%
+
+    );
+
+}
+
+
+/* =========================================
+   06
+========================================= */
+
+.p06{
+
+    left:0;
+
+    top:490px;
+
+    width:50%;
+
+    height:140px;
+
+
+    clip-path:polygon(
+
+        3.2% 0%,
+
+        100% 2%,
+
+        93% 98%,
+
+        0% 93%
+
+    );
+
+}
+
+
+/* =========================================
+   06 气泡文字
+========================================= */
+
+.bubble-06 span{
+
+    font-size:8px;
+
+    line-height:1.2;
+
+    font-weight:600;
+
+    transform:
+        translateX(1px)
+        translateY(-0.5px);
+
+}
+
+
+/* =========================================
+   06 气泡
+========================================= */
+
+.bubble-06{
+
+    left:50%;
+
+    top:50%;
+
+    width:80px;
+
+    height:30px;
+
+    padding:3px 5px;
+
+    font-size:8px;
+
+
+    transform:
+        translateY(3px)
+        rotate(-3deg);
+
+}
+
+
+.bubble-06.show-detail{
+
+    transform:
+        translateY(0)
+        rotate(-3deg);
+
+}
+
+
+/* =========================================
+   06 气泡箭头黑色
+========================================= */
+
+.bubble-06::after{
+
+    content:"";
+
+    position:absolute;
+
+    right:12px;
+
+    bottom:-10px;
+
+    width:0;
+
+    height:0;
+
+    border-left:8px solid transparent;
+
+    border-right:3px solid transparent;
+
+    border-top:12px solid #111;
+
+    transform:rotate(-12deg);
+
+}
+
+
+/* =========================================
+   06 气泡箭头白色
+========================================= */
+
+.bubble-06::before{
+
+    content:"";
+
+    position:absolute;
+
+    right:15.5px;
+
+    bottom:-5px;
+
+    width:0;
+
+    height:0;
+
+    border-left:7px solid transparent;
+
+    border-right:0.5px solid transparent;
+
+    border-top:8px solid #fff;
+
+    z-index:2;
+
+    transform:rotate(-3deg);
+
+}
+
+
+/* =========================================
+   07
+========================================= */
+
+.p07{
+
+    left:48%;
+
+    top:492.5px;
+
+    width:54%;
+
+    height:145px;
+
+
+    clip-path:polygon(
+
+        5.5% 0%,
+
+        88% 2%,
+
+        93% 98%,
+
+        0% 93%
+
+    );
+
+}
+
+
+/* =========================================
+   07 抬起
+========================================= */
+
+.action-07{
+
+    right:18%;
+
+    top:35%;
+
+    font-size:8px;
+
+    font-weight:600;
+
+    white-space:nowrap;
+
+
+    transform:
+        translateY(3px)
+        rotate(-4deg);
+
+}
+
+
+.action-07.show-detail{
+
+    transform:
+        translateY(0)
+        rotate(-4deg);
+
+}
+
+
+/* =========================================
+   抬起动作线1
+========================================= */
+
+.action-07::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-11px;
+
+    top:-4px;
+
+    width:8px;
+
+    height:1.3px;
+
+    background:#111;
+
+    transform:rotate(65deg);
+
+}
+
+
+/* =========================================
+   抬起动作线2
+========================================= */
+
+.action-07::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:-10px;
+
+    top:4px;
+
+    width:8px;
+
+    height:1.3px;
+
+    background:#111;
+
+    transform:rotate(35deg);
+
+}
+
+
+/* =========================================
+   07 你看～
+========================================= */
+
+.bubble-07{
+
+    right:9%;
+
+    bottom:20%;
+
+    width:58px;
+
+    height:34px;
+
+    font-size:9px;
+
+
+    transform:
+        translateY(3px)
+        rotate(2deg);
+
+}
+
+
+.bubble-07.show-detail{
+
+    transform:
+        translateY(0)
+        rotate(2deg);
+
+}
+
+
+/* =========================================
+   08
+========================================= */
+
+.p08{
+
+    left:0%;
+
+    top:626px;
+
+    width:100%;
+
+    height:190px;
+
+
+    clip-path:polygon(
+
+        0% 0%,
+
+        98.2% 8%,
+
+        100% 100%,
+
+        0% 100%
+
+    );
+
+}
+
+
+/* =========================================
+   图片位置
+========================================= */
+
+.p01 img{
+
+    object-position:50% 50%;
+
+    transform:
+        translateX(-5px)
+        translateY(-5px)
+        scale(1.15);
+
+}
+
+
+.p02 img{
+
+    object-position:140% 50%;
+
+    transform:
+        translateX(-5px)
+        translateY(20px)
+        scale(1.8);
+
+}
+
+
+.p03 img{
+
+    object-position:50% -5%;
+
+    transform:
+        translateX(-5px)
+        translateY(20px)
+        scale(1.5);
+
+}
+
+
+.p04 img{
+
+    object-position:50% 50%;
+
+    transform:
+        translateX(-13px)
+        translateY(0px)
+        scale(1.05);
+
+}
+
+
+.p05 img{
+
+    object-position:50% 50%;
+
+    transform:
+        translateX(10px)
+        translateY(-5px)
+        scale(1.05);
+
+}
+
+
+.p06 img{
+
+    object-position:50% 50%;
+
+    transform:
+        translateX(10px)
+        translateY(15px)
+        scale(1.5);
+
+}
+
+
+.p07 img{
+
+    object-position:50% 50%;
+
+    transform:
+        translateX(-4px)
+        translateY(30px)
+        scale(1.5);
+
+}
+
+
+.p08 img{
+
+    object-position:50% 50%;
+
+    transform:
+        translateX(-5px)
+        translateY(0px)
+        scale(1.3);
+
+}
+
+
+/* =========================================
+   首次点按提示
+========================================= */
+
+#tapHint{
+
+    position:fixed;
+
+    left:50%;
+
+    bottom:
+        calc(
+            24px
+            +
+            env(safe-area-inset-bottom)
+        );
+
+
+    transform:
+        translateX(-50%);
+
+
+    z-index:9999;
+
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:7px;
+
+
+    color:
+        rgba(
+            0,
+            0,
+            0,
+            0.42
+        );
+
+
+    font-family:
+        "PingFang SC",
+        "Microsoft YaHei",
+        sans-serif;
+
+
+    font-size:11px;
+
+    letter-spacing:2px;
+
+
+    /*
+       不挡住用户点击
+    */
+
+    pointer-events:none;
+
+
+    opacity:1;
+
+
+    /*
+       消失动画
+    */
+
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
+
+
+    /*
+       呼吸动画
+    */
+
+    animation:
+        tapHintBreath
+        1.8s
+        ease-in-out
+        infinite;
+
+}
+
+
+/* =========================================
+   提示文字
+========================================= */
+
+.tap-hint-text{
+
+    white-space:nowrap;
+
+}
+
+
+/* =========================================
+   提示小箭头
+========================================= */
+
+.tap-hint-arrow{
+
+    width:8px;
+
+    height:8px;
+
+
+    border-right:
+        1.4px solid
+        rgba(
+            0,
+            0,
+            0,
+            0.38
+        );
+
+
+    border-bottom:
+        1.4px solid
+        rgba(
+            0,
+            0,
+            0,
+            0.38
+        );
+
+
+    transform:
+        rotate(45deg);
+
+}
+
+
+/* =========================================
+   提示呼吸动画
+========================================= */
+
+@keyframes tapHintBreath{
+
+    0%,
+    100%{
+
+        opacity:0.30;
+
+    }
+
+
+    50%{
+
+        opacity:0.85;
+
+    }
+
+}
+
+
+/* =========================================
+   第一次点击后提示消失
+========================================= */
+
+#tapHint.hide{
+
+    opacity:0;
+
+
+    transform:
+        translateX(-50%)
+        translateY(8px);
+
+
+    animation:none;
+
+}
+
+
+/* =========================================
+   PC查看
+========================================= */
+
+@media(min-width:600px){
+
+    .comic-page{
+
+        box-shadow:
+            0 10px 40px
+            rgba(0,0,0,.15);
+
+    }
+
+}
+
+
+/* =========================================
+   减少动态效果
+========================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    .panel,
+    .delayed-element,
+    #tapHint{
+
+        transition:none;
+
+        animation:none;
+
+    }
+
+}

@@ -1,0 +1,766 @@
+{
+  "chapters": [
+    {
+      "number": 1,
+      "label": "第一章",
+      "subtitle": "回头",
+      "images": 8,
+      "panels": 8
+    },
+    {
+      "number": 2,
+      "label": "第二章",
+      "subtitle": "傍晚",
+      "images": 9,
+      "panels": 9
+    },
+    {
+      "number": 3,
+      "label": "第三章",
+      "subtitle": "熟悉",
+      "images": 8,
+      "panels": 7
+    },
+    {
+      "number": 4,
+      "label": "第四章",
+      "subtitle": "一起犯傻",
+      "images": 10,
+      "panels": 10
+    },
+    {
+      "number": 5,
+      "label": "第五章",
+      "subtitle": "安全带",
+      "images": 7,
+      "panels": 7
+    },
+    {
+      "number": 6,
+      "label": "第六章",
+      "subtitle": "她记得",
+      "images": 12,
+      "panels": 12
+    },
+    {
+      "number": 7,
+      "label": "第七章",
+      "subtitle": "靠近",
+      "images": 13,
+      "panels": 13
+    },
+    {
+      "number": 8,
+      "label": "第八章",
+      "subtitle": "湘湖",
+      "images": 18,
+      "panels": 11
+    },
+    {
+      "number": 9,
+      "label": "第九章",
+      "subtitle": "普通人",
+      "images": 10,
+      "panels": 10
+    },
+    {
+      "number": 10,
+      "label": "第十章",
+      "subtitle": "现在",
+      "images": 8,
+      "panels": 9
+    }
+  ],
+  "files": [
+    {
+      "source": "一至十章/layout-test.css",
+      "destination": "chapter1/style.css",
+      "bytes": 14590,
+      "sha256": "3fd33b0fdf84650c2b4681b3225eb77049c8aad136671ddba3aab9e140ec4a9d"
+    },
+    {
+      "source": "一至十章/images/chapter1/01.png",
+      "destination": "chapter1/images/01.png",
+      "bytes": 3088234,
+      "sha256": "8c49834a724e0b65a37cff5279bb8a707c11f5b5d0759eea3d288e8f6a9ee4cf"
+    },
+    {
+      "source": "一至十章/images/chapter1/02.png",
+      "destination": "chapter1/images/02.png",
+      "bytes": 3017172,
+      "sha256": "4e5debc12402eb01f98f1d3119a8bd2c808022e1f6b3dceab0e62cb548aad5ca"
+    },
+    {
+      "source": "一至十章/images/chapter1/03.png",
+      "destination": "chapter1/images/03.png",
+      "bytes": 2708729,
+      "sha256": "b24df6b5b003034a1fd7f3e98ff5d06ccf08e1f97f55b8d8e39c0caa35875151"
+    },
+    {
+      "source": "一至十章/images/chapter1/04.png",
+      "destination": "chapter1/images/04.png",
+      "bytes": 3617662,
+      "sha256": "e40e15a732ff0214cc6029e2715005d0f676cfdb1406ccb1fbb568cb2e67f886"
+    },
+    {
+      "source": "一至十章/images/chapter1/05.png",
+      "destination": "chapter1/images/05.png",
+      "bytes": 2331890,
+      "sha256": "22a214c78c1e0a356bd46a2f1d4d26fa70a463e5af2f9cbb7ee3ee78d67d0dee"
+    },
+    {
+      "source": "一至十章/images/chapter1/06.png",
+      "destination": "chapter1/images/06.png",
+      "bytes": 2649777,
+      "sha256": "e1e5294713c8a609d5152932d91a5f771c3d0039fc5989139d81b0cb2e2ef0ac"
+    },
+    {
+      "source": "一至十章/images/chapter1/07.png",
+      "destination": "chapter1/images/07.png",
+      "bytes": 2424046,
+      "sha256": "d5f715eec63ec15e625edf64a91bcfeb1d7031990ed433e27d8b0084458eb09d"
+    },
+    {
+      "source": "一至十章/images/chapter1/08.png",
+      "destination": "chapter1/images/08.png",
+      "bytes": 2766835,
+      "sha256": "10c00264a9704a77f1e19390efb466e1a93f311f5dcec4f9e7c78bdcb35b1fe4"
+    },
+    {
+      "source": "一至十章/chapter2.css",
+      "destination": "chapter2/style.css",
+      "bytes": 7425,
+      "sha256": "393e043ad48473fba78e78800b80bbe1b19c63e69fda39e6ccd38adede65d6df"
+    },
+    {
+      "source": "一至十章/images/chapter2/01.png",
+      "destination": "chapter2/images/01.png",
+      "bytes": 2355288,
+      "sha256": "38586501aea9d01f2275f01eafb3f69259a6f6bd57d9ba638ade9181639af591"
+    },
+    {
+      "source": "一至十章/images/chapter2/02.png",
+      "destination": "chapter2/images/02.png",
+      "bytes": 2538348,
+      "sha256": "d6f25e80b749f70a6d0dff80dc3c171652f92ed5936e35d1c2db3b30df85e6da"
+    },
+    {
+      "source": "一至十章/images/chapter2/03.png",
+      "destination": "chapter2/images/03.png",
+      "bytes": 2146311,
+      "sha256": "94b1e268de660c4977a8b931171cad4b7972373e6c04cfa9d657f23ee2205af9"
+    },
+    {
+      "source": "一至十章/images/chapter2/04.png",
+      "destination": "chapter2/images/04.png",
+      "bytes": 2444799,
+      "sha256": "019203822d7a37c57b5ef1bf619424b77905a80942299620fd964d1092afcbf7"
+    },
+    {
+      "source": "一至十章/images/chapter2/05.png",
+      "destination": "chapter2/images/05.png",
+      "bytes": 2796455,
+      "sha256": "146458d213e11b718c75ae8dee4647365cd66bd22f9333b263671bde32f23da6"
+    },
+    {
+      "source": "一至十章/images/chapter2/06.png",
+      "destination": "chapter2/images/06.png",
+      "bytes": 2509867,
+      "sha256": "f8efcb814713a6d8ee395e5f78e48a7d0cd2d27aaa8bed63edfdd5691b6bd4ad"
+    },
+    {
+      "source": "一至十章/images/chapter2/07.png",
+      "destination": "chapter2/images/07.png",
+      "bytes": 2036871,
+      "sha256": "82beb7cc382d261930c1551aeabdf08ec8c7f28286563d326842c3187107fb9e"
+    },
+    {
+      "source": "一至十章/images/chapter2/08.png",
+      "destination": "chapter2/images/08.png",
+      "bytes": 2400067,
+      "sha256": "13c4784c077a8b33ac4e5902f4a67efcfa7040e4377dba3da543d0fbb5e50730"
+    },
+    {
+      "source": "一至十章/images/chapter2/09.png",
+      "destination": "chapter2/images/09.png",
+      "bytes": 2017303,
+      "sha256": "6049d02d742b8f63112aa37f959575d7c2635c2a8bd20aebeef4110b16b24e64"
+    },
+    {
+      "source": "一至十章/chapter3.css",
+      "destination": "chapter3/style.css",
+      "bytes": 8288,
+      "sha256": "3852a5c850d7e0c0a2229e942a832b92a5ba8528e61d5d4a2623a1b727743e44"
+    },
+    {
+      "source": "一至十章/images/chapter3/01.png",
+      "destination": "chapter3/images/01.png",
+      "bytes": 2248727,
+      "sha256": "7cb7bf71d6070e1775873bda39bcbbd38f8a96b8d672e4a92eb42dfd1d748cb6"
+    },
+    {
+      "source": "一至十章/images/chapter3/02.png",
+      "destination": "chapter3/images/02.png",
+      "bytes": 2340285,
+      "sha256": "e6300611c487639369a2be8275038a95d67508fbe356cced9b5d39792f3d94b0"
+    },
+    {
+      "source": "一至十章/images/chapter3/03.png",
+      "destination": "chapter3/images/03.png",
+      "bytes": 2273375,
+      "sha256": "0167dc1d401432f166523d6b0c6e62437924dab5a441ddcc5e96b6e62c12c743"
+    },
+    {
+      "source": "一至十章/images/chapter3/04.png",
+      "destination": "chapter3/images/04.png",
+      "bytes": 2447593,
+      "sha256": "27cce60d98547a3fc6264d8195e391f0696b18fcf6c8dba48ab1ef1cfbc0ec2e"
+    },
+    {
+      "source": "一至十章/images/chapter3/05.png",
+      "destination": "chapter3/images/05.png",
+      "bytes": 2011083,
+      "sha256": "f5d51b34a49f73ce1aade95db6da2adea47c856bfaf1037e848fb418b1715c19"
+    },
+    {
+      "source": "一至十章/images/chapter3/06.png",
+      "destination": "chapter3/images/06.png",
+      "bytes": 2089304,
+      "sha256": "614bc80d9811bc763337b44a24e679a295aa6648da4ef73f4f7cb63ded81e192"
+    },
+    {
+      "source": "一至十章/images/chapter3/07.png",
+      "destination": "chapter3/images/07.png",
+      "bytes": 2438384,
+      "sha256": "555a3460412747576e3a5223102c26d8461baada33302aa541af22391f50c88c"
+    },
+    {
+      "source": "一至十章/images/chapter3/08.png",
+      "destination": "chapter3/images/08.png",
+      "bytes": 1069339,
+      "sha256": "294411a56e3c629860b4a62a603bdd23795ad6c1c1d4303930e3f289a132bfbb"
+    },
+    {
+      "source": "一至十章/chapter4.css",
+      "destination": "chapter4/style.css",
+      "bytes": 7844,
+      "sha256": "f85cb29a36bf4a86d32496ee3c0e5ce7edc7f3e457b200be0856fc1aa43cb2b1"
+    },
+    {
+      "source": "一至十章/images/chapter4/01.png",
+      "destination": "chapter4/images/01.png",
+      "bytes": 1260271,
+      "sha256": "89931e00c76b96617a28a45db22ae8564130e54852214f5016f119cfc77ff66f"
+    },
+    {
+      "source": "一至十章/images/chapter4/02.png",
+      "destination": "chapter4/images/02.png",
+      "bytes": 2565738,
+      "sha256": "3fd8a0ab0485c3e98637fbceb35b8c1491d0c7b0391cf0d649f6f58730f5aa55"
+    },
+    {
+      "source": "一至十章/images/chapter4/03.png",
+      "destination": "chapter4/images/03.png",
+      "bytes": 2484071,
+      "sha256": "7bf5718283d28d32c80a8dbb85379082f3499b522eff2b400326d29a76fe06ae"
+    },
+    {
+      "source": "一至十章/images/chapter4/04.png",
+      "destination": "chapter4/images/04.png",
+      "bytes": 3195347,
+      "sha256": "347ea9ccae9ea27827aeec227d9e59482feaa2babefd8cc518ed4b0536867010"
+    },
+    {
+      "source": "一至十章/images/chapter4/05.png",
+      "destination": "chapter4/images/05.png",
+      "bytes": 2976164,
+      "sha256": "53f7a4a947d5ec41f27e603f26c4377129efb0bb5192b3a0509bb6754945bb0f"
+    },
+    {
+      "source": "一至十章/images/chapter4/06.png",
+      "destination": "chapter4/images/06.png",
+      "bytes": 2165127,
+      "sha256": "7614fb836d0d0f336d69fba12aa6ecc40cf0a1e92a513da1dc5ea3924ff5de95"
+    },
+    {
+      "source": "一至十章/images/chapter4/07.png",
+      "destination": "chapter4/images/07.png",
+      "bytes": 1564663,
+      "sha256": "5a9e235037016b1896b1f4ed9d87980cdd4d9b3f5246bae9d1854ee98e1bedd6"
+    },
+    {
+      "source": "一至十章/images/chapter4/08.png",
+      "destination": "chapter4/images/08.png",
+      "bytes": 2374350,
+      "sha256": "581ca0c18a989787612ea50547d20f59263963ae0ec87c5a4cd8cb028900f537"
+    },
+    {
+      "source": "一至十章/images/chapter4/09.png",
+      "destination": "chapter4/images/09.png",
+      "bytes": 2160827,
+      "sha256": "302a6c80487c0552c2c173c02b887110a5b71dce1b100b261ced101a4be2d48d"
+    },
+    {
+      "source": "一至十章/images/chapter4/10.png",
+      "destination": "chapter4/images/10.png",
+      "bytes": 2262288,
+      "sha256": "0fb44aa03ad0e242535e2c9ee00d335d59f2a464a2a3c93fc218a30ca2ee7218"
+    },
+    {
+      "source": "一至十章/chapter5.css",
+      "destination": "chapter5/style.css",
+      "bytes": 6188,
+      "sha256": "d68bd63de4f60befa1fdc0bebc0533fe6c62cb96db88f5e1b8947ccd176ded3f"
+    },
+    {
+      "source": "一至十章/images/chapter5/01.png",
+      "destination": "chapter5/images/01.png",
+      "bytes": 1002762,
+      "sha256": "60a925df8e1d61f08fa64304e95aefc43596e60421b0af03eda3a67cdccd9b81"
+    },
+    {
+      "source": "一至十章/images/chapter5/02.png",
+      "destination": "chapter5/images/02.png",
+      "bytes": 1478631,
+      "sha256": "88640b762e9c12b177b370bdcc54318c90ba505a9f9e8876677caf86aaf960a9"
+    },
+    {
+      "source": "一至十章/images/chapter5/03.png",
+      "destination": "chapter5/images/03.png",
+      "bytes": 1570144,
+      "sha256": "7bbd9824d85f40a3e2aaa7a4d0879d585e33059a87e337eae6ea915d82e40c02"
+    },
+    {
+      "source": "一至十章/images/chapter5/04.png",
+      "destination": "chapter5/images/04.png",
+      "bytes": 1607740,
+      "sha256": "f0aacb9f2a78910bcacc1be58115001b58f7a18fa964af1a67d18d451ff4c432"
+    },
+    {
+      "source": "一至十章/images/chapter5/05.png",
+      "destination": "chapter5/images/05.png",
+      "bytes": 1664645,
+      "sha256": "92386e3c99a1a97f628ee4bb0d56dfe4de76ceaf444d676346138c9a0d0cf74a"
+    },
+    {
+      "source": "一至十章/images/chapter5/06.png",
+      "destination": "chapter5/images/06.png",
+      "bytes": 1231287,
+      "sha256": "784b5f60cfccbe61956ea611dcc62de4b8b4a97858f2865d135a017df4184299"
+    },
+    {
+      "source": "一至十章/images/chapter5/07.png",
+      "destination": "chapter5/images/07.png",
+      "bytes": 897154,
+      "sha256": "6e42fbb3f9544297445b4a0078310321561ff8ae8c5e2845645be447333412ab"
+    },
+    {
+      "source": "一至十章/chapter6.css",
+      "destination": "chapter6/style.css",
+      "bytes": 7077,
+      "sha256": "d7595dbcf1946dbf1c5335813df48a0f6d058caf8de5237e7c2bdbab87170006"
+    },
+    {
+      "source": "一至十章/images/chapter6/01.png",
+      "destination": "chapter6/images/01.png",
+      "bytes": 1125600,
+      "sha256": "05fd8a4d90855071d1d3566b3c92cd2dac6362f56c12e9e8c3343ba0cab55597"
+    },
+    {
+      "source": "一至十章/images/chapter6/02.png",
+      "destination": "chapter6/images/02.png",
+      "bytes": 1726583,
+      "sha256": "4f262e9ec79826ebd17654249c5a142272741c958c5e19d6d2abb9e37b123aab"
+    },
+    {
+      "source": "一至十章/images/chapter6/03.png",
+      "destination": "chapter6/images/03.png",
+      "bytes": 1267566,
+      "sha256": "a54cb0b4c368fe8bd54db0a879a1835ced7f31682cf64025b3f09f914b42984c"
+    },
+    {
+      "source": "一至十章/images/chapter6/04.png",
+      "destination": "chapter6/images/04.png",
+      "bytes": 2335343,
+      "sha256": "158e4b90531ffb71e0d679b71c3041df5c00f91796b94cb69c76725e304d172e"
+    },
+    {
+      "source": "一至十章/images/chapter6/05.png",
+      "destination": "chapter6/images/05.png",
+      "bytes": 1191002,
+      "sha256": "04758e94558cbbe6eebd90c47f99303e1c0b62e1db8be860ca4ac4cf60c15ee4"
+    },
+    {
+      "source": "一至十章/images/chapter6/06.png",
+      "destination": "chapter6/images/06.png",
+      "bytes": 2413069,
+      "sha256": "aaf71d39f8549fd74e79dace3a0e2f194b37e5be03e271d76cb3732e41a117f1"
+    },
+    {
+      "source": "一至十章/images/chapter6/07.png",
+      "destination": "chapter6/images/07.png",
+      "bytes": 1028201,
+      "sha256": "f3c6ece84352e202a69a5622e8c34f781c45b534f140916b3f4562881da9694e"
+    },
+    {
+      "source": "一至十章/images/chapter6/08.png",
+      "destination": "chapter6/images/08.png",
+      "bytes": 841354,
+      "sha256": "aae3f647e6707633a3353962ef3b00b3391aa46d7a59df2ae40267a3353199c4"
+    },
+    {
+      "source": "一至十章/images/chapter6/09.png",
+      "destination": "chapter6/images/09.png",
+      "bytes": 864050,
+      "sha256": "70051303b2f51ba6c5b5e1b701ae3d8aa5215fa48d6afd36c555253b76e99c0f"
+    },
+    {
+      "source": "一至十章/images/chapter6/10.png",
+      "destination": "chapter6/images/10.png",
+      "bytes": 1208451,
+      "sha256": "0338c2be276d284e158ad6a8a10a369a5969b63b42ad17f36129acc14500eadc"
+    },
+    {
+      "source": "一至十章/images/chapter6/11.png",
+      "destination": "chapter6/images/11.png",
+      "bytes": 1993859,
+      "sha256": "c4bd7988d7826b2425924f419a1ad0de4dcbb4f7d0091a131162f2197614a91a"
+    },
+    {
+      "source": "一至十章/images/chapter6/12.png",
+      "destination": "chapter6/images/12.png",
+      "bytes": 1848199,
+      "sha256": "072579c796643692533a2e50fd6aacff43dcb0fadd875df1afbd5c416932a23b"
+    },
+    {
+      "source": "一至十章/chapter7.css",
+      "destination": "chapter7/style.css",
+      "bytes": 8306,
+      "sha256": "d1ff590da812354453894cfcdd29169985e4f2e9cb85732116f511f17d3f880c"
+    },
+    {
+      "source": "一至十章/images/chapter7/01.png",
+      "destination": "chapter7/images/01.png",
+      "bytes": 1338445,
+      "sha256": "a45b89ec2252074ee4c4f20222f629a3f7f79a401e2bd73fd831113d7634dd40"
+    },
+    {
+      "source": "一至十章/images/chapter7/02.png",
+      "destination": "chapter7/images/02.png",
+      "bytes": 2774409,
+      "sha256": "f5dce5d25729effc0241f5fb9cbe58a07d653e0bdf27daeb5771610ce4a1a08e"
+    },
+    {
+      "source": "一至十章/images/chapter7/03.png",
+      "destination": "chapter7/images/03.png",
+      "bytes": 1375717,
+      "sha256": "17610ef9d112caebb42a5e3f79ccda1ea69ccd943f0c23caa797f52797b3bbd3"
+    },
+    {
+      "source": "一至十章/images/chapter7/04.png",
+      "destination": "chapter7/images/04.png",
+      "bytes": 1361041,
+      "sha256": "18fd7b830fce3aaeb18fc2081728a8f7031a9e6dd0241926e8c9df3b570b80a9"
+    },
+    {
+      "source": "一至十章/images/chapter7/05.png",
+      "destination": "chapter7/images/05.png",
+      "bytes": 1339626,
+      "sha256": "eebcbfc2722c713f0fc797265d01e0dce1be8d3f1ce60974343fc19400f5523c"
+    },
+    {
+      "source": "一至十章/images/chapter7/06.png",
+      "destination": "chapter7/images/06.png",
+      "bytes": 1712957,
+      "sha256": "d4d790ad833502f8f7e2a235c8b986a6d178952a0970012f6503894a016ac10b"
+    },
+    {
+      "source": "一至十章/images/chapter7/07.png",
+      "destination": "chapter7/images/07.png",
+      "bytes": 1408959,
+      "sha256": "ab440aad4e82dcdc6a036e22ac57866cb060f244240b1ef4566353266be233de"
+    },
+    {
+      "source": "一至十章/images/chapter7/08.png",
+      "destination": "chapter7/images/08.png",
+      "bytes": 1412647,
+      "sha256": "f7bfdbde2270555d56ba5dfcae4e0666ad98752193e5c4fc726242b303f9457e"
+    },
+    {
+      "source": "一至十章/images/chapter7/09.png",
+      "destination": "chapter7/images/09.png",
+      "bytes": 2893806,
+      "sha256": "1a39617900169b647f4e6f4009d5076d8cb654bd55329456fb4fba38846f22a2"
+    },
+    {
+      "source": "一至十章/images/chapter7/10.png",
+      "destination": "chapter7/images/10.png",
+      "bytes": 1069459,
+      "sha256": "4870714708efb8ce93e7a89fafdf7c317e8f864896fba7ad0ddfa38db83ae89f"
+    },
+    {
+      "source": "一至十章/images/chapter7/11.png",
+      "destination": "chapter7/images/11.png",
+      "bytes": 3196776,
+      "sha256": "240ea71f6e2fb872f4b050574c536fb1505388d492b0c7b6796c98f6a9695f7c"
+    },
+    {
+      "source": "一至十章/images/chapter7/12.png",
+      "destination": "chapter7/images/12.png",
+      "bytes": 3757041,
+      "sha256": "fda8e1bfdc75e6eaf6429f4100ccf453b03ebc2608e3be34e1a34026eaba0c7a"
+    },
+    {
+      "source": "一至十章/images/chapter7/13.png",
+      "destination": "chapter7/images/13.png",
+      "bytes": 3068622,
+      "sha256": "02cfc7d0427c976e4b36972c1e54da0aba14fe0ac3714abdad638fc29b3a46ee"
+    },
+    {
+      "source": "一至十章/chapter8.css",
+      "destination": "chapter8/style.css",
+      "bytes": 10599,
+      "sha256": "d2d073318664c8a8ee6aab03ef4efc71bd188357f23371ff46a19669fa38c7f3"
+    },
+    {
+      "source": "一至十章/images/chapter8/01.png",
+      "destination": "chapter8/images/01.png",
+      "bytes": 2484939,
+      "sha256": "71e3c33b49fe07430ee531a93a886b56fa37c019b44bcd6891604f3c07fdef3a"
+    },
+    {
+      "source": "一至十章/images/chapter8/02.png",
+      "destination": "chapter8/images/02.png",
+      "bytes": 3454790,
+      "sha256": "b7dc956d9d19d0b7f4303ff0d07b53cc1ef50d47c96ead08391b2323ff2d55e7"
+    },
+    {
+      "source": "一至十章/images/chapter8/03.png",
+      "destination": "chapter8/images/03.png",
+      "bytes": 3129011,
+      "sha256": "fc7d5b7873faad2503c710b1daaafd85ebc9d2a53e23f4ff0af26252cb62f0ad"
+    },
+    {
+      "source": "一至十章/images/chapter8/04.png",
+      "destination": "chapter8/images/04.png",
+      "bytes": 3112073,
+      "sha256": "c4ad32a73ad2501317fbab0fd06d06ca2d97926ad9d4bfd44ec8d059fdf9d1ef"
+    },
+    {
+      "source": "一至十章/images/chapter8/05.png",
+      "destination": "chapter8/images/05.png",
+      "bytes": 3808024,
+      "sha256": "5b3532d6de70b0595b631c5a51a84621a39ca5ac80b03aa701a35b00fdbb6364"
+    },
+    {
+      "source": "一至十章/images/chapter8/06.png",
+      "destination": "chapter8/images/06.png",
+      "bytes": 3071449,
+      "sha256": "3a4e7c35dfb15c3e917194ad2c33dd3a54ac38a3d1acd5158b97692b0f2476ec"
+    },
+    {
+      "source": "一至十章/images/chapter8/07.png",
+      "destination": "chapter8/images/07.png",
+      "bytes": 2774715,
+      "sha256": "b216e11e089b16674cffd6f36b71df47889ffaabee8feaad57a9c75264d72918"
+    },
+    {
+      "source": "一至十章/images/chapter8/08.png",
+      "destination": "chapter8/images/08.png",
+      "bytes": 3561811,
+      "sha256": "d777611d1dd3a2ce968603939de7202e64470184795a321d4e958de1e1ee7a99"
+    },
+    {
+      "source": "一至十章/images/chapter8/09.png",
+      "destination": "chapter8/images/09.png",
+      "bytes": 4093738,
+      "sha256": "6d40958234a33c3fa60a62ce13fc37bc52764c4aea1c02682781998a36642879"
+    },
+    {
+      "source": "一至十章/images/chapter8/10.png",
+      "destination": "chapter8/images/10.png",
+      "bytes": 3284231,
+      "sha256": "97ae611d7be21fa4031086ee57aaf3b0b746aae1e51301fb1a3e04ed3739225d"
+    },
+    {
+      "source": "一至十章/images/chapter8/11.png",
+      "destination": "chapter8/images/11.png",
+      "bytes": 1780561,
+      "sha256": "2eb65ebcd621c807b1fef0f9b34cf8a3e0ac15bfb990401165fd179c68e51162"
+    },
+    {
+      "source": "一至十章/images/chapter8/12.png",
+      "destination": "chapter8/images/12.png",
+      "bytes": 2925372,
+      "sha256": "bd84a2f5b3a4c77dde3619140f12e829c89edd16dc9527a789ff469dc26b3b88"
+    },
+    {
+      "source": "一至十章/images/chapter8/13.png",
+      "destination": "chapter8/images/13.png",
+      "bytes": 4073006,
+      "sha256": "aaa7de207da380ea1cff0281bf09b2ff27031dd0099ef92995c77037902ab124"
+    },
+    {
+      "source": "一至十章/images/chapter8/14.png",
+      "destination": "chapter8/images/14.png",
+      "bytes": 2143205,
+      "sha256": "7f9e3bebc60c27058acc35ce3248c006368a2d4391321c95860a3fc68298a9e2"
+    },
+    {
+      "source": "一至十章/images/chapter8/15.png",
+      "destination": "chapter8/images/15.png",
+      "bytes": 2173625,
+      "sha256": "4081c213e4f65949bcba28a470f4296096c69f5e45a1850fa2e6f5a4fc459abc"
+    },
+    {
+      "source": "一至十章/images/chapter8/16.png",
+      "destination": "chapter8/images/16.png",
+      "bytes": 2085977,
+      "sha256": "7ccd9743d93fe58dafb83912fae0331a1a2fb55bb43c32709a1dbedae3600c87"
+    },
+    {
+      "source": "一至十章/images/chapter8/17.png",
+      "destination": "chapter8/images/17.png",
+      "bytes": 2239559,
+      "sha256": "1ccefafb8152300f9b7aeeda9312bba2efc1abe1da7a2ec70ebc39d5b8d13f4b"
+    },
+    {
+      "source": "一至十章/images/chapter8/18.png",
+      "destination": "chapter8/images/18.png",
+      "bytes": 3757121,
+      "sha256": "3f32b276248dc4c8413e5475aca3341e90895d748273f76aa5257ff7cafe7dfc"
+    },
+    {
+      "source": "一至十章/chapter9.css",
+      "destination": "chapter9/style.css",
+      "bytes": 8155,
+      "sha256": "15883d1c8d8c1532b71b760c521b71f493bf4776c17cdc3c07d63150148c4539"
+    },
+    {
+      "source": "一至十章/images/chapter9/1.png",
+      "destination": "chapter9/images/1.png",
+      "bytes": 4903323,
+      "sha256": "ae8d1ac1ddb6923217fb9c98456c17c91d8aaca908a436fcc5edf2c3bb729512"
+    },
+    {
+      "source": "一至十章/images/chapter9/10.png",
+      "destination": "chapter9/images/10.png",
+      "bytes": 1438077,
+      "sha256": "16145e763473788156037cac04300389b4f9cd032e96bce4f817f823eb0e4662"
+    },
+    {
+      "source": "一至十章/images/chapter9/2.png",
+      "destination": "chapter9/images/2.png",
+      "bytes": 1750212,
+      "sha256": "682b1d3cd93caa028f3c8b6f2406e71d3d260e274d32d349eb7ab7e4c345da51"
+    },
+    {
+      "source": "一至十章/images/chapter9/3.png",
+      "destination": "chapter9/images/3.png",
+      "bytes": 3049333,
+      "sha256": "fcf52012a940a141ac4e6250920695a4e6544407625ffc9fcf0cd48ef7c5da5d"
+    },
+    {
+      "source": "一至十章/images/chapter9/4.png",
+      "destination": "chapter9/images/4.png",
+      "bytes": 2767393,
+      "sha256": "9fd6bdff0804d45eb691ee29d9d60ad3c7780fd7fe1f36b1aea608d067204726"
+    },
+    {
+      "source": "一至十章/images/chapter9/5.png",
+      "destination": "chapter9/images/5.png",
+      "bytes": 2894128,
+      "sha256": "d2ce9180f7a7124e9a2f43b4e1194d93280174ba5f7953642be6e4da63a1cc82"
+    },
+    {
+      "source": "一至十章/images/chapter9/6.png",
+      "destination": "chapter9/images/6.png",
+      "bytes": 3290826,
+      "sha256": "0da3238e6b90d0ed91855c82eece4cbb077f2c1626ee8dc7ce76143654ab9910"
+    },
+    {
+      "source": "一至十章/images/chapter9/7.png",
+      "destination": "chapter9/images/7.png",
+      "bytes": 2702355,
+      "sha256": "9b52c6ac80e4d61458c221c541a026b20bea64f755734cde04e563538e973a4c"
+    },
+    {
+      "source": "一至十章/images/chapter9/8.png",
+      "destination": "chapter9/images/8.png",
+      "bytes": 2355020,
+      "sha256": "f6b990bee313a90cb8a2c5f3486c03b17a4e7e812cf0cd703ea04c235eda2bd1"
+    },
+    {
+      "source": "一至十章/images/chapter9/9.png",
+      "destination": "chapter9/images/9.png",
+      "bytes": 2652070,
+      "sha256": "f86b3d8e584f8cad84de8d0ae63281274c0d64ec9b92d941f231f65ae60c8867"
+    },
+    {
+      "source": "一至十章/chapter10.css",
+      "destination": "chapter10/style.css",
+      "bytes": 3959,
+      "sha256": "89c8bfc48732795fa42378c5325dc925523806c651361811ad8be5b1a91914e5"
+    },
+    {
+      "source": "一至十章/images/chapter10/1.png",
+      "destination": "chapter10/images/1.png",
+      "bytes": 1403569,
+      "sha256": "b808db53971875e1255fdb96bf540cfd12c675586edfa2e09cea40d48c740da3"
+    },
+    {
+      "source": "一至十章/images/chapter10/2.png",
+      "destination": "chapter10/images/2.png",
+      "bytes": 2489335,
+      "sha256": "1ad44e910f904a9fa79f48c57ae4a2d9d65889365a8e8ee5ac95f90fa6daf75e"
+    },
+    {
+      "source": "一至十章/images/chapter10/3.png",
+      "destination": "chapter10/images/3.png",
+      "bytes": 2478804,
+      "sha256": "a66d817ad8a559cb728929f08a9828a68a52f893461a1098dc294ad2cb003512"
+    },
+    {
+      "source": "一至十章/images/chapter10/4.png",
+      "destination": "chapter10/images/4.png",
+      "bytes": 2492768,
+      "sha256": "ece68a952cade3e0d7afe51168089be0b47201b26a28fe02443b1c784e6bb473"
+    },
+    {
+      "source": "一至十章/images/chapter10/5.png",
+      "destination": "chapter10/images/5.png",
+      "bytes": 1326760,
+      "sha256": "2f0edf65e4283fe3e1f41a6211ea1c37c9e78964534248a4f604ac6bb5344e2c"
+    },
+    {
+      "source": "一至十章/images/chapter10/6.png",
+      "destination": "chapter10/images/6.png",
+      "bytes": 1687158,
+      "sha256": "0c2ffb2a7f6a8858aa8c0dc4ea1cefbd82d5c96ecdff11caee079c48e0d4099c"
+    },
+    {
+      "source": "一至十章/images/chapter10/7.png",
+      "destination": "chapter10/images/7.png",
+      "bytes": 2063452,
+      "sha256": "3f8076cf0b51b1e6cb16f40baa3c049a75e0675f4e3e4f5a4be6efe52475c4e8"
+    },
+    {
+      "source": "一至十章/images/chapter10/8.png",
+      "destination": "chapter10/images/8.png",
+      "bytes": 1841579,
+      "sha256": "5102c2adee8f3a1145a590252cb46b823e422c3acd065aafa11723ecfbb6b522"
+    },
+    {
+      "source": "ending.mp4",
+      "destination": "chapter10/ending.mp4",
+      "bytes": 80247221,
+      "sha256": "d06274ae9454c14038a7d543c4257588a5370e7d0cae4ad127c3898839b01918"
+    },
+    {
+      "source": "一至十章/story-icon.svg",
+      "destination": "story-icon.svg",
+      "bytes": 184,
+      "sha256": "3895f42be63d896d2b778a8a68e212ae716b5586a2245d6d52761c22fa516fd1"
+    }
+  ]
+}

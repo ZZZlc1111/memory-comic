@@ -1,0 +1,397 @@
+/* 第三章 · 熟悉 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    color-scheme: light;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    background: #dfe5ee;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    overflow-x: hidden;
+    font-family: Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.comic-page {
+    width: min(100vw, 430px);
+    margin: 0 auto;
+    padding: max(8px, env(safe-area-inset-top)) 8px 0;
+    overflow: hidden;
+    background: #fff;
+}
+
+.comic-canvas {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 823 / 1742;
+    contain: layout paint;
+    overflow: hidden;
+    background: #fff;
+}
+
+/* 分镜公共动画 */
+
+.panel {
+    position: absolute;
+    overflow: visible;
+    background: #111;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate3d(0, 7px, 0) scale(0.996);
+    -webkit-transform: translate3d(0, 7px, 0) scale(0.996);
+    transition:
+        opacity 0.6s ease,
+        transform 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+}
+
+.panel.visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate3d(0, 0, 0) scale(1);
+    -webkit-transform: translate3d(0, 0, 0) scale(1);
+}
+
+.panel-inner {
+    position: absolute;
+    inset: 2px;
+    overflow: hidden;
+    clip-path: inherit;
+    -webkit-clip-path: inherit;
+    background: #eee;
+}
+
+.panel-inner > img {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    -webkit-user-drag: none;
+}
+
+.delayed-element {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate3d(0, 3px, 0) scale(0.98);
+    -webkit-transform: translate3d(0, 3px, 0) scale(0.98);
+    transition:
+        opacity 0.45s ease,
+        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.delayed-element.show-detail {
+    opacity: 1;
+    visibility: visible;
+    transform: translate3d(0, 0, 0) scale(1);
+    -webkit-transform: translate3d(0, 0, 0) scale(1);
+}
+
+.comic-text {
+    position: absolute;
+    z-index: 30;
+    color: #111;
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-weight: 700;
+    pointer-events: none;
+}
+
+.speech-bubble {
+    position: absolute;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 7px;
+    border: 1.35px solid #111;
+    border-radius: 50%;
+    background: #fff;
+    color: #111;
+    text-align: center;
+    white-space: nowrap;
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    line-height: 1.28;
+    pointer-events: none;
+}
+
+/* 七个分镜画框：比例取自参考1 */
+
+.p01 {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 15.40%;
+    clip-path: polygon(0 0, 99.7% 0, 100% 100%, 0.3% 100%);
+    -webkit-clip-path: polygon(0 0, 99.7% 0, 100% 100%, 0.3% 100%);
+}
+
+.p02 {
+    left: 0;
+    top: 15.72%;
+    width: 100%;
+    height: 17.2%;
+    overflow: visible;
+    background: transparent;
+}
+
+.p03 {
+    left: 0%;
+    top: 32.8%;
+    width: 100%;
+    height: 16.2%;
+    clip-path: polygon(0 2.5%, 99.7% 0.8%, 100% 100%, 0% 98%);
+    -webkit-clip-path: polygon(0 2.5%, 99.7% 0.8%, 100% 98%, 0% 98%);
+}
+
+.p04 {
+    left: 0;
+    top: 49%;
+    width: 47.5%;
+    height: 15.5%;
+    clip-path: polygon(0.4% 0, 99% 0%, 97% 100%, 0 98%);
+    -webkit-clip-path: polygon(0.4% 0, 98% 0%, 97% 100%, 0 100%);
+}
+
+.p05 {
+    left: 46.5%;
+    top: 48.9%;
+    width: 53.6%;
+    height: 15.60%;
+    clip-path: polygon(1.5% 1%, 99.6% 0, 100% 98%, 0.5% 100%);
+    -webkit-clip-path: polygon(1.5% 1%, 99.6% 0, 100% 100%, 0.5% 100%);
+}
+
+.p06 {
+    left: 0;
+    top: 64.78%;
+    width: 100%;
+    height: 17.15%;
+    clip-path: polygon(0.3% 0, 100% 0.5%, 99.7% 99%, 0 98%);
+    -webkit-clip-path: polygon(0.3% 0, 100% 0.5%, 99.7% 99%, 0 98%);
+}
+
+.p07 {
+    left: 0;
+    top: 82.10%;
+    width: 100%;
+    height: 17.60%;
+    clip-path: polygon(0.3% 0, 99.7% 1%, 100% 100%, 0 99%);
+    -webkit-clip-path: polygon(0.3% 0, 99.7% 1%, 100% 100%, 0 99%);
+}
+
+/* 图片构图 */
+
+.p01 img { object-position: 50% 48%;}
+.p03 img { object-position: 50% 65%; }
+.p04 img {
+    object-position: 54% 52%;
+    transform: translateY(7px) scale(1.58);
+    -webkit-transform: translateY(7px) scale(1.58);
+    transform-origin: 56% 53%;
+}
+.p05 img {
+    object-position: 49% 51%;
+    transform: translateX(15px) translateY(6px) scale(1.25);
+    -webkit-transform: translateX(15px) translateY(6px) scale(1.25);
+    transform-origin: 54% 54%;
+}
+.p06 img { object-position: 50% 46%; }
+.p07 img { object-position: 50% 88%; }
+
+/* 分镜2：两个独立斜切画框，中间保留白色间隔 */
+
+.split-frame {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #111;
+}
+
+.split-frame-left {
+    left: 0;
+    width: 54.5%;
+    clip-path: polygon(0.5% 0, 100% 0%, 80% 99%, 0 100%);
+    -webkit-clip-path: polygon(0.5% 0, 100% 0%, 78% 99%, 0 100%);
+}
+
+.split-frame-right {
+    right: 0;
+    width: 57%;
+    clip-path: polygon(23.5% 1%, 100% 2%, 99.5% 98%, 0.5% 99%);
+    -webkit-clip-path: polygon(21.5% 0%, 100% 0%, 99.5% 98%, 0.5% 99%);
+}
+
+.split-frame-inner {
+    position: absolute;
+    inset: 2px;
+    overflow: hidden;
+    clip-path: inherit;
+    -webkit-clip-path: inherit;
+    background: #eee;
+}
+
+.split-frame img {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    -webkit-user-drag: none;
+}
+
+.split-frame-left img {
+    object-position: 70% 48%;
+}
+
+.split-frame-right img {
+    object-position: 10% 48%;
+}
+
+/* 文字和气泡位置 */
+
+.action-01 {
+    left: 46%;
+    top: 37%;
+    font-size: 8px;
+    white-space: nowrap;
+    -webkit-text-stroke: 1.35px #fff;
+    paint-order: stroke fill;
+    text-shadow: 0 0 1px #fff;
+    transform: translate3d(0, 3px, 0) rotate(-22deg);
+    -webkit-transform: translate3d(0, 3px, 0) rotate(-22deg);
+}
+
+.action-01.show-detail {
+    transform: translate3d(0, 0, 0) rotate(-22deg);
+    -webkit-transform: translate3d(0, 0, 0) rotate(-22deg);
+}
+
+.bubble-01 {
+    right: 1%;
+    top: 40%;
+    width: 112px;
+    height: 40px;
+    font-size: 9px;
+}
+
+.bubble-02-a {
+    left: 6%;
+    top: 12%;
+    width: 62px;
+    height: 39px;
+}
+
+.bubble-02-b {
+    left: 2%;
+    bottom: 5%;
+    width: 102px;
+    height: 46px;
+    font-size: 8px;
+}
+
+.bubble-03 {
+    left: 5%;
+    top: 23%;
+    width: 99px;
+    height: 48px;
+    font-size: 8px;
+}
+
+.bubble-05 {
+    left: 35%;
+    top: 5%;
+    width: 80px;
+    height: 50px;
+    font-size: 8px;
+   }
+.bubble-05 span{
+    transform:translateY(2px);
+}
+/* 首次点按提示 */
+
+#tapHint {
+    position: fixed;
+    z-index: 9999;
+    left: 50%;
+    bottom: calc(24px + env(safe-area-inset-bottom));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    color: rgba(0, 0, 0, 0.42);
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    pointer-events: none;
+    opacity: 1;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    animation: tapHintBreath 1.8s ease-in-out infinite;
+}
+
+.tap-hint-text { white-space: nowrap; }
+
+.tap-hint-arrow {
+    width: 8px;
+    height: 8px;
+    border-right: 1.4px solid rgba(0, 0, 0, 0.38);
+    border-bottom: 1.4px solid rgba(0, 0, 0, 0.38);
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+#tapHint.hide {
+    opacity: 0;
+    transform: translateX(-50%) translateY(8px);
+    -webkit-transform: translateX(-50%) translateY(8px);
+    animation: none;
+}
+
+@keyframes tapHintBreath {
+    0%, 100% { opacity: 0.30; }
+    50% { opacity: 0.85; }
+}
+
+@media (min-width: 600px) {
+    .comic-page { box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .panel,
+    .delayed-element,
+    #tapHint {
+        transition: none;
+        animation: none;
+    }
+}

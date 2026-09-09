@@ -1,0 +1,389 @@
+/* 第六章：十二格长页漫画 */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    color-scheme: light;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    background: #dfe5ee;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    overflow-x: hidden;
+    font-family: Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.comic-page {
+width:min(100vw,430px);
+margin:0 auto;
+padding:max(8px,env(safe-area-inset-top)) 8px 40px;
+overflow:visible;
+background:#fff;
+}
+
+.comic-canvas {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 791 / 2000;
+
+    /* 保留布局计算，但取消绘制裁切 */
+    contain: layout;
+
+    /* 允许最后的章节文字显示 */
+    overflow: visible;
+
+    border-radius: 0;
+    background: #fff;
+}
+
+/* 分镜与前五章使用相同的淡入上移动画 */
+
+.panel {
+    position: absolute;
+    overflow: visible;
+    background: #111;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate3d(0, 7px, 0) scale(0.996);
+    -webkit-transform: translate3d(0, 7px, 0) scale(0.996);
+    transition:
+        opacity 0.6s ease,
+        transform 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+}
+
+.panel.visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate3d(0, 0, 0) scale(1);
+    -webkit-transform: translate3d(0, 0, 0) scale(1);
+}
+
+.panel-inner {
+    position: absolute;
+    inset: 2px;
+    overflow: hidden;
+    background: #eee;
+}
+
+.panel-inner > img {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    -webkit-user-drag: none;
+}
+
+.delayed-element {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate3d(0, 3px, 0) scale(0.98);
+    -webkit-transform: translate3d(0, 3px, 0) scale(0.98);
+    transition:
+        opacity 0.45s ease,
+        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.delayed-element.show-detail {
+    opacity: 1;
+    visibility: visible;
+    transform: translate3d(0, 0, 0) scale(1);
+    -webkit-transform: translate3d(0, 0, 0) scale(1);
+}
+
+.speech-bubble {
+    position: absolute;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 7px;
+    border: 1.35px solid #111;
+    border-radius: 50%;
+    background: #fff;
+    color: #111;
+    text-align: center;
+    white-space: nowrap;
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 8px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+
+/* 十二格排布：对应参考图的横格、左右分栏和右侧上下双格 */
+
+.p01 {
+    left: 1.5%;
+    top: 0.4%;
+    width: 97%;
+    height: 12.1%;
+}
+
+.p02 {
+    left: 1.5%;
+    top: 12.7%;
+    width: 63.7%;
+    height: 17.05%;
+}
+
+.p03 {
+    left: 65.85%;
+    top: 12.7%;
+    width: 32.5%;
+    height: 17.05%;
+}
+
+.p04 {
+    left: 1.5%;
+    top: 30%;
+    width: 54.4%;
+    height: 17.55%;
+}
+
+.p05 {
+    left: 56.5%;
+    top: 30%;
+    width: 42.2%;
+    height: 8.45%;
+}
+
+.p06 {
+    left: 56.5%;
+    top: 38.7%;
+    width: 42.2%;
+    height: 8.8%;
+}
+
+.p07 {
+    left: 1.5%;
+    top: 47.8%;
+    width: 97%;
+    height: 14%;
+}
+
+.p08 {
+    left: 1.5%;
+    top: 62.1%;
+    width: 47.3%;
+    height: 11.0%;
+}
+
+.p09 {
+    left: 49.5%;
+    top: 62.1%;
+    width: 49.0%;
+    height: 11.0%;
+}
+
+.p10 {
+    left: 1.5%;
+    top: 73.4%;
+    width: 45.4%;
+    height: 11.65%;
+}
+
+.p11 {
+    left: 47.5%;
+    top: 73.4%;
+    width: 51.25%;
+    height: 11.65%;
+}
+
+.p12 {
+    left: 1.5%;
+    top: 85.4%;
+    width: 97.1%;
+    height: 17%;
+}
+
+/* 各格裁切焦点 */
+
+.p01 img { object-position: 50% 47%; }
+.p02 img { object-position: 50% 50%;
+    transform: translateY(10px) scale(1.15);} 
+.p03 img { object-position: 52% 50%; }
+.p04 img { object-position: 50% 50%; }
+.p05 img { object-position: 50% 51%; }
+.p06 img { object-position: 50% 52%;
+    transform: translateY(5px) scale(1.6); }
+.p07 img { object-position: 50% 28%; 
+    transform: translateY(0px) scale(1.01);}
+.p08 img { object-position: 50% 50%; }
+.p09 img { object-position: 50% 50%; }
+.p10 img { object-position: 50% 50%; }
+.p11 img { object-position: 50% 50%; }
+.p12 img { object-position: 50% 48%;
+    transform: translateY(0px) scale(1.01); }
+
+/* 对白位置 */
+
+.bubble-02 {
+    left: 12%;
+    top: 8%;
+    width: 58px;
+    height: 42px;
+    font-size: 9px;
+}
+
+
+
+.bubble-04-b {
+    left: 45%;
+    top: 20%;
+    width: 60px;
+    height: 35px;
+}
+
+.bubble-04-c {
+    right: 5%;
+    top: 60%;
+    width: 36px;
+    height: 30px;
+    font-size: 9px;
+}
+
+.bubble-07-a {
+    left: 13%;
+    top: 13%;
+    width: 76px;
+    height: 55px;
+}
+
+.bubble-07-b {
+    right: 12%;
+    top: 25%;
+    width: 70px;
+    height: 55px;
+}
+
+.bubble-10-a {
+    left: 8%;
+    top: 50%;
+    width: 60px;
+    height: 35px;
+}
+
+.bubble-10-b {
+    right: 2%;
+    top: 17%;
+    width: 34px;
+    height: 29px;
+    font-size: 9px;
+}
+
+.bubble-12 {
+    left: 8%;
+    top: 12%;
+    width: 66px;
+    height: 45px;
+    font-size: 9px;
+}
+
+.ending-caption {
+position: absolute;
+z-index: 40;
+left: 50%;
+top: 102%;
+color: #333;
+font-family: "Songti SC", "STSong", "PingFang SC", serif;
+font-size: 11px;
+letter-spacing: 0.28em;
+white-space: nowrap;
+
+transform: translate3d(-50%, 0, 0);
+-webkit-transform: translate3d(-50%, 0, 0);
+}
+
+.ending-caption.show-detail {
+    transform: translate3d(-50%, 0, 0) scale(1);
+    -webkit-transform: translate3d(-50%, 0, 0) scale(1);
+}
+
+/* 点按提示 */
+
+#tapHint {
+    position: fixed;
+    z-index: 9999;
+    left: 50%;
+    bottom: calc(24px + env(safe-area-inset-bottom));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    color: rgba(0, 0, 0, 0.42);
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    pointer-events: none;
+    opacity: 1;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    animation: tapHintBreath 1.8s ease-in-out infinite;
+}
+
+.tap-hint-text {
+    white-space: nowrap;
+}
+
+.tap-hint-arrow {
+    width: 8px;
+    height: 8px;
+    border-right: 1.4px solid rgba(0, 0, 0, 0.38);
+    border-bottom: 1.4px solid rgba(0, 0, 0, 0.38);
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+#tapHint.hide {
+    opacity: 0;
+    transform: translateX(-50%) translateY(8px);
+    -webkit-transform: translateX(-50%) translateY(8px);
+    animation: none;
+}
+
+@keyframes tapHintBreath {
+    0%, 100% { opacity: 0.30; }
+    50% { opacity: 0.85; }
+}
+
+@media (min-width: 600px) {
+    .comic-page {
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .panel,
+    .delayed-element,
+    #tapHint {
+        transition: none;
+        animation: none;
+    }
+}

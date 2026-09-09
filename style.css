@@ -1,0 +1,28 @@
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { min-height: 100%; background: #dfe5ee; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { min-height: 100vh; overflow-x: hidden; color: #111; font-family: Arial, "PingFang SC", "Microsoft YaHei", sans-serif; -webkit-tap-highlight-color: transparent; touch-action: pan-y pinch-zoom; user-select: none; -webkit-user-select: none; }
+[hidden] { display: none !important; }
+#reader { width: min(100%, 430px); min-height: 100vh; margin: 0 auto; padding-bottom: max(84px, env(safe-area-inset-bottom)); background: #fff; overflow-anchor: none; }
+.chapter, manga-stage { display: block; width: 100%; }
+manga-stage { overflow: hidden; touch-action: pan-y pinch-zoom; }
+.chapter-transition { display: grid; place-items: center; min-height: 92px; padding: 26px 24px 24px; color: #222; font-family: "Songti SC", "STSong", serif; font-size: 22px; font-weight: 400; line-height: 1.6; letter-spacing: .2em; text-indent: .2em; }
+.story-ending { display: grid; place-items: center; min-height: 180px; padding: 50px 24px; color: #666; font-family: "Songti SC", "STSong", serif; font-size: 20px; letter-spacing: .2em; }
+#storyControls { position: fixed; z-index: 10000; inset: 0; pointer-events: none; }
+.story-nav-button { position: absolute; bottom: calc(16px + env(safe-area-inset-bottom)); display: grid; width: 44px; height: 44px; padding: 0 0 4px; place-items: center; border: 1px solid rgba(20,24,30,.2); border-radius: 50%; background: rgba(255,255,255,.58); box-shadow: 0 3px 14px rgba(20,24,30,.16); color: rgba(17,20,24,.78); font: 300 34px/1 Arial,sans-serif; cursor: pointer; pointer-events: auto; touch-action: manipulation; -webkit-backdrop-filter: blur(9px); backdrop-filter: blur(9px); }
+.story-nav-button:disabled { opacity: .22; cursor: default; }
+.story-nav-previous { left: calc(14px + env(safe-area-inset-left)); }
+.story-nav-next { right: calc(14px + env(safe-area-inset-right)); }
+.directory-link { position: absolute; top: max(12px, env(safe-area-inset-top)); right: max(14px, env(safe-area-inset-right)); padding: 8px 12px; border-radius: 20px; background: rgba(255,255,255,.82); color: #444; font-size: 12px; text-decoration: none; pointer-events: auto; }
+a:focus-visible, button:focus-visible { outline: 2px solid #46637b; outline-offset: 4px; }
+#directory { width: min(100%, 620px); min-height: 100vh; margin: 0 auto; padding: max(22px, env(safe-area-inset-top)) 20px 36px; background: #fff; }
+.directory-actions { display: flex; justify-content: flex-end; margin-bottom: 22px; }
+.directory-actions button { border: 0; background: transparent; color: #666; padding: 8px 0 8px 12px; font: inherit; font-size: 13px; cursor: pointer; }
+.chapter-list { list-style: none; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+.chapter-list a { display: flex; flex-direction: column; gap: 10px; border: 1px solid #e7e7e7; padding: 22px 18px; color: #222; text-decoration: none; border-radius: 4px; }
+.chapter-list a:hover { background: #f5f7f9; }
+.chapter-list span { color: #888; font-size: 12px; }
+.chapter-list strong { font-family: "Songti SC", "STSong", serif; font-size: 21px; font-weight: 500; }
+#readerError { position: fixed; z-index: 10001; bottom: 78px; left: 50%; transform: translateX(-50%); width: min(90%, 360px); padding: 14px; border: 1px solid #ddd; border-radius: 6px; background: #fff; font-size: 14px; line-height: 1.6; }
+#readerError button { margin-left: 12px; padding: 4px 10px; cursor: pointer; }
+@media (min-width: 600px) { #reader { box-shadow: 0 10px 40px rgba(0,0,0,.15); } }
